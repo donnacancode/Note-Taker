@@ -2,32 +2,24 @@ const express = require("express");
 const path = require("path");
 const fs = require("fs");
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001; // Use the PORT environment variable if provided
+
 const notesFilePath = path.join(__dirname, "notes.json");
 
 app.use(express.json());
 
 // Function to read notes from the JSON file
 const readNotes = () => {
-  try {
-    if (!fs.existsSync(notesFilePath)) {
-      return [];
-    }
-    const data = fs.readFileSync(notesFilePath, "utf8");
-    return JSON.parse(data);
-  } catch (error) {
-    console.error("Error reading notes:", error);
+  if (!fs.existsSync(notesFilePath)) {
     return [];
   }
+  const data = fs.readFileSync(notesFilePath, "utf8");
+  return JSON.parse(data);
 };
 
 // Function to write notes to the JSON file
 const writeNotes = (notes) => {
-  try {
-    fs.writeFileSync(notesFilePath, JSON.stringify(notes, null, 2), "utf8");
-  } catch (error) {
-    console.error("Error writing notes:", error);
-  }
+  fs.writeFileSync(notesFilePath, JSON.stringify(notes, null, 2), "utf8");
 };
 
 // Middleware to serve static files
