@@ -2,7 +2,7 @@
 
 ## Overview
 
-**Donna's Note Take App** is a simple web application that allows users to create, store, view, and delete notes!
+**Donna's Note Taker App** is a simple web application that allows users to create, store, view, and delete notes!
 
 ## Technologies Used
 
